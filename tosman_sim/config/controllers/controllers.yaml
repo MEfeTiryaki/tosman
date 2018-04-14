@@ -1,0 +1,16 @@
+# Controllers loaded at startup
+controller_manager:
+  failproof_controller: ""
+  controller_pair:
+    controller:
+      plugin_name:              "PDcontroller"
+      name:                     "PDcontroller"
+      is_ros:                   false
+      parameter_package:        "tosman_sim"
+      parameter_path:           "config/controller"
+    emergency_controller:
+      plugin_name:              "None"
+      name:                     "None"
+      is_ros:                   false
+      parameter_package:        "tosman_sim"
+      parameter_path:           "config/controller"

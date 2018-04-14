@@ -1,0 +1,5 @@
+subscribers:
+  actuator_commands:
+    topic: /tosman_controller_frame/actuator_Commands
+    queue_size: 10
+    latch: false

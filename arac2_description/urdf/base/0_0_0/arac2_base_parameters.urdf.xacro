@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="r_b"                value= "0.2"/> <!-- [m] -->
+  <xacro:property name="h_b"                value= "0.05"/> <!-- [m] -->
+  <xacro:property name="m_B"                value= "1.0"/> <!-- 19.7157 [kg] -->
+  <xacro:property name="B_Ixx_B"            value= "0.1"/> <!-- [kg * m^2] -->
+  <xacro:property name="B_Iyy_B"            value= "0.1000"/> <!-- [kg * m^2] -->
+  <xacro:property name="B_Izz_B"            value= "0.1000"/> <!-- [kg * m^2] -->
+  <xacro:property name="B_Ixy_B"            value= "0.0000"/> <!-- [kg * m^2] -->
+  <xacro:property name="B_Ixz_B"            value="-0.0000"/> <!-- [kg * m^2] -->
+  <xacro:property name="B_Iyz_B"            value="-0.000"/> <!-- [kg * m^2] -->
+  <xacro:property name="collision_body_r"   value= "0.2"/> <!-- [m] -->
+  <xacro:property name="collision_body_h"   value= "0.1"/> <!-- [m] -->
+
+
+</robot>

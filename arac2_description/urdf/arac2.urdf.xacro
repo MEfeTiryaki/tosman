@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<!-- This file contains the description of the arac robot. -->
+
+<robot name="arac2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Arguments -->
+  <xacro:arg name="simulation"          default="true"/>
+  <xacro:arg name="fixed"               default="false"/>
+  <xacro:arg name="material_color_rgba" default="0.7 0.7 0.7 1.0"/>
+  <xacro:arg name="simulate_using_gpu"  default="true"/>
+
+  <!-- Component versions -->
+  <xacro:property name="base_version"    value="0_0_0"/>
+
+  <!-- Includes -->
+  <xacro:include filename="$(find arac2_description)/urdf/include/arac2_utils.urdf.xacro"/>
+
+  <xacro:include filename="$(find arac2_description)/urdf/base/${base_version}/arac2_base.urdf.xacro"/>
+  <xacro:include filename="$(find arac2_description)/urdf/wheel/wheel.urdf.xacro"/>
+
+  <!-- Base -->
+  <xacro:arac2_base name="base">
+    <properties>
+      <xacro:include filename="$(find arac2_description)/urdf/base/${base_version}/arac2_base_parameters.urdf.xacro"/>
+    </properties>
+  </xacro:arac2_base>
+
+  <!-- Left components -->
+  <xacro:wheel leg="L">
+    <properties>
+      <xacro:include filename="$(find arac2_description)/urdf/wheel/wheel_parameters.urdf.xacro"/>
+    </properties>
+  </xacro:wheel>
+
+  <!-- Right components -->
+  <xacro:wheel leg="R">
+    <properties>
+      <xacro:include filename="$(find arac2_description)/urdf/wheel/wheel_parameters.urdf.xacro"/>
+    </properties>
+  </xacro:wheel>
+
+
+
+
+    <!-- Hokuyo Laser -->
+    <joint name="hokuyo_joint" type="fixed">
+       <axis xyz="0 1 0" />
+       <origin xyz="0 0 ${h_b}" rpy="0 0 0"/>
+       <parent link="base"/>
+       <child link="hokuyo_link"/>
+    </joint>
+
+    <!-- Hokuyo Laser -->
+    <link name="hokuyo_link">
+     <collision>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+         <box size="0.1 0.1 0.1"/>
+       </geometry>
+     </collision>
+
+     <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+         <mesh filename= "package://arac2_description/urdf/mesh/hokuyo.dae"/>
+       </geometry>
+     </visual>
+
+     <inertial>
+       <mass value="1e-5" />
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+     </inertial>
+    </link>
+
+    <!-- Imu Link -->
+    <joint name="imu_joint" type="fixed">
+       <axis xyz="0 1 0" />
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <parent link="base"/>
+       <child link="imu_link"/>
+    </joint>
+    <link name="imu_link">
+     <collision>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+         <box size="0.05 0.05 0.05"/>
+       </geometry>
+     </collision>
+
+     <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <geometry>
+         <box size="0.05 0.05 0.05"/>
+       </geometry>
+     </visual>
+
+     <inertial>
+       <mass value="1e-5" />
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+     </inertial>
+    </link>
+
+</robot>

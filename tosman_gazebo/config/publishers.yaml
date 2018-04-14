@@ -1,0 +1,30 @@
+publishers:
+
+  kulman_state:
+    topic: /state_estimator/kulman_state
+    queue_size: 10
+    latch: false
+    min_frequency_rate: 0.1
+    max_frequency_rate: 0.1
+
+  joint_state:
+    topic: /state_estimator/simulation_joint_states
+    queue_size: 10
+    latch: false
+    min_frequency_rate: 0.1
+    max_frequency_rate: 0.1
+
+  pose_in_odom:
+    topic: /state_estimator/pose_in_odom
+    queue_size: 1
+    latch: false
+
+  pose_in_map:
+    topic: /state_estimator/pose_in_map
+    queue_size: 1
+    latch: false
+
+  twist:
+    topic: /state_estimator/twist
+    queue_size: 1
+    latch: false

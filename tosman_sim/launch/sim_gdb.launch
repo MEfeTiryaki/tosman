@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+
+  <!-- Launch simulation -->
+  <include file="$(find tosman_sim)/launch/sim.launch">
+    <arg name="tosman_controller_frame_launch_prefix" value="gdb -ex run --args"/>
+  </include>
+
+</launch>

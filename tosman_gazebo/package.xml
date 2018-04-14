@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>arac2_gazebo</name>
+  <version>0.1.7</version>
+  <description>Arac Gazebo plugins</description>
+  <maintainer email="m.efetiryaki@gmail.com">Mehmet Efe Tiryaki</maintainer>
+
+  <license>Proprietary</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+
+  <depend>boost</depend>
+  <depend>gazebo</depend>
+  <depend>gazebo_ros</depend>
+  <depend>roscpp</depend>
+  <depend>param_io</depend>
+  <depend>gazebo_plugins</depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+  <depend>arac_msgs</depend>
+  <depend>arac_gazebo</depend>
+  <depend>tf</depend>
+
+  <export>
+    <gazebo_ros plugin_path="${prefix}/lib" gazebo_media_path="${prefix}"/>
+  </export>
+</package>

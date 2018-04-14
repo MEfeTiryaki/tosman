@@ -1,0 +1,8 @@
+actuators:
+  gains:
+    motor:
+      jointPositionPGain: 100.0
+      jointPositionDGain: 2.0
+      jointPositionVelocityTorquePGain: 30.0
+      jointPositionVelocityTorqueIGain: 0.0
+      jointPositionVelocityTorqueDGain: 0.0

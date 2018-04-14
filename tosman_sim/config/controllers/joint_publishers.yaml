@@ -1,0 +1,2 @@
+# Controllers loaded at startup
+joint_publisher: [ /state_estimator/simulation_joint_states ]
