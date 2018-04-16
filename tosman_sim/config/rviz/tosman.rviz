@@ -85,6 +85,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        dummy_wheel_hint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         hokuyo_link:
           Alpha: 1
           Show Axes: false
@@ -102,19 +107,52 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        L_WHEEL:
+          Value: true
+        R_WHEEL:
+          Value: true
+        base:
+          Value: true
+        base_inertia:
+          Value: true
+        dummy_wheel_front:
+          Value: true
+        dummy_wheel_hint:
+          Value: true
+        hokuyo_link:
+          Value: true
+        imu_link:
+          Value: true
+        map:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        map:
+          base:
+            L_WHEEL:
+              {}
+            R_WHEEL:
+              {}
+            base_inertia:
+              {}
+            dummy_wheel_front:
+              {}
+            dummy_wheel_hint:
+              {}
+            hokuyo_link:
+              {}
+            imu_link:
+              {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -146,13 +184,13 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Class: rviz/Marker
-      Enabled: false
-      Marker Topic: /arac_controller_frame/visualization_marker
+      Enabled: true
+      Marker Topic: /tosman_controller_frame/visualization_marker
       Name: Marker
       Namespaces:
         {}
       Queue Size: 100
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -178,7 +216,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.08545637
+      Distance: 2.48378181
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -193,10 +231,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.135398418
+      Pitch: 0.275398582
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.120398097
+      Yaw: 0.675397933
     Saved: ~
 Window Geometry:
   Displays:

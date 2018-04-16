@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>
+
+  <!-- Give the robot description parameter a name -->
+  <arg name="description_name" default="tosman_description"/>
+  <!-- Set path of robot description -->
+  <arg name="description_file" default="$(find tosman_description)/urdf/tosman.urdf.xacro"/>
+  <!-- TF prefix -->
+  <arg name="tf_prefix" default=""/>
+  <!-- Joint state topic name -->
+  <arg name="joint_states_topic" default="/state_estimator/joint_states"/>
+
+  <arg name="model_path"                              default="$(find tosman_gazebo)/.."/>
+  <!-- Name of the world -->
+  <arg name="world"                                   default="empty"/>
+  <!-- Path to the world file -->
+  <arg name="world_file"                              default="$(find tosman_gazebo)/worlds/$(arg world).world"/>
+
+  <!-- Set true to fix the robot's main body in space -->
+  <arg name="fixed"                                   default="false"/>
+
+  <!-- Namespace to run the nodes in -->
+  <arg name="run_rviz"                                default="true"/>
+
+  <arg name="tf_minimal"                                default="false"/>
+  <!-- rviz configuration -->
+  <arg name="rviz_config_path"                        default="$(find arac_sim)/config/rviz/arac.rviz"/>
+  <!-- Path to the RViz world -->
+  <arg name="rviz_world_path"                         default="$(find tosman_gazebo)/rviz/$(arg world).yaml"/>
+
+  <node name="tosman_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+     <param name="use_gui"           value="true"/>
+     <param name="rate"              value="100"/>
+     <remap from="robot_description" to="tosman_description"/>
+   </node>
+
+   <node ns="tosman_tf_publisher" name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+     <param name="publish_frequency" value="100"/>
+     <param name="use_tf_static"     value="true"/>
+     <param name="tf_prefix"         value="$(arg tf_prefix)"/>
+     <remap from="robot_description" to="tosman_description"/>
+   </node>
+   <!-- RViz -->
+   <group if="$(arg run_rviz)">
+     <!-- Launch node -->
+     <include file="$(find arac_rviz)/launch/rviz.launch">
+       <arg name="rviz_config_path" value="$(arg rviz_config_path)"/>
+       <arg name="rviz_world_path"  value="$(arg rviz_world_path)"/>
+       <arg name="tf_minimal"       value="$(arg tf_minimal)"/>
+     </include>
+   </group>
+  <!-- Load robot description -->
+  <include file="$(find tosman_description)/launch/load.launch">
+    <arg name="description_name" value="$(arg description_name)"/>
+    <arg name="description_file" value="$(arg description_file)"/>
+  </include>
+
+
+</launch>

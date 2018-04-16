@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<package format="2">
+
+  <name>tosman_model</name>
+  <version>0.0.1</version>
+  <description>None</description>
+  <license>Proprietary</license>
+
+  <maintainer email="m.efetiryaki@gmail.com">Mehmet Efe Tiryaki</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_export_depend>eigen</build_export_depend>
+
+
+  <depend>arac_model</depend>
+
+</package>

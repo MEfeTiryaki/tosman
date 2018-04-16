@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>arac2_gazebo</name>
+  <name>tosman_gazebo</name>
   <version>0.1.7</version>
   <description>Arac Gazebo plugins</description>
   <maintainer email="m.efetiryaki@gmail.com">Mehmet Efe Tiryaki</maintainer>
@@ -21,6 +21,7 @@
   <depend>xacro</depend>
   <depend>arac_msgs</depend>
   <depend>arac_gazebo</depend>
+
   <depend>tf</depend>
 
   <export>

@@ -44,7 +44,7 @@
   <!-- Enable/disable rviz -->
   <arg name="run_rviz"                                default="true"/>
   <!-- rviz configuration -->
-  <arg name="rviz_config_path"                        default="$(find tosman_sim)/config/rviz/arac.rviz"/>
+  <arg name="rviz_config_path"                        default="$(find tosman_sim)/config/rviz/tosman.rviz"/>
   <!-- Path to the RViz world -->
   <arg name="rviz_world_path"                         default="$(find tosman_gazebo)/rviz/$(arg world).yaml"/>
 

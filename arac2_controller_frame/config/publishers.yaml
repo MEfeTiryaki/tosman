@@ -1,5 +1,0 @@
-publishers:
-  actuator_commands:
-    topic: /arac_controller_frame/actuator_Commands
-    queue_size: 10
-    latch: false

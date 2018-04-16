@@ -2,7 +2,7 @@
 
 <package format="2">
 
-  <name>tosman</name>
+  <name>tosman_controller</name>
   <version>0.0.1</version>
   <description>None</description>
   <license>Proprietary</license>
@@ -11,16 +11,7 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>tosman_controller</depend>
-  <depend>tosman_controller_frame</depend>
-  <depend>tosman_description</depend>
-  <depend>tosman_gazebo</depend>
   <depend>tosman_model</depend>
-  <depend>tosman_sim</depend>
-  <depend>arac_msgs</depend>
-  <depend>arac_joystick</depend>
-  <depend>arac_state_estimator</depend>
-  <depend>arac_rviz</depend>
+  <depend>arac_controller</depend>
   <depend>param_io</depend>
-
 </package>

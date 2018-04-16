@@ -1,76 +1,86 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(tosman_gazebo)
+project(tosman_state_estimator)
 
-add_definitions(-std=c++11)
+add_definitions("-std=c++11")
 
 find_package(catkin REQUIRED
   COMPONENTS
-  arac_gazebo
-    param_io
-    arac_msgs
-    gazebo_plugins
-    gazebo_ros
-    roscpp
-    urdf
-    xacro
-    tf
+  kulman_state_estimator
+  arac_state_estimator
+  arac_msgs
+  tosman_model
+  arac_model
+  roscpp
+  param_io
+  geometry_msgs
+  std_msgs
+  sensor_msgs
+
+
 )
 
-find_package(gazebo REQUIRED)
-find_package(Boost REQUIRED)
+
+find_package(Eigen3 REQUIRED)
 
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
-  ${GAZEBO_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-)
-link_directories(
-  ${GAZEBO_LIBRARY_DIRS}
+  ${EIGEN3_INCLUDE_DIR}
 )
 
 catkin_package(
   INCLUDE_DIRS
     include
-    ${GAZEBO_INCLUDE_DIRS}
+    ${catkin_INCLUDE_DIRS}
   LIBRARIES
     ${PROJECT_NAME}
   CATKIN_DEPENDS
-  arac_gazebo
-    param_io
+    kulman_state_estimator
+    arac_state_estimator
+    tosman_model
     arac_msgs
-    gazebo_plugins
-    urdf
-    xacro
+ 	  arac_model
+    roscpp
+    param_io
+    geometry_msgs
+    std_msgs
+    sensor_msgs
   DEPENDS
-  	roscpp
-  	gazebo_ros
-    Boost
-    tf
 )
+
+
 
 add_library(
   ${PROJECT_NAME}
-  src/TosmanGazeboPlugin.cpp
+  src/TosmanEKF.cpp
+  src/TosmanPerfectEstimator.cpp
 )
+
 add_dependencies(
   ${PROJECT_NAME}
   ${catkin_EXPORTED_TARGETS}
 )
+
 target_link_libraries(
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
-  ${GAZEBO_LIBRARIES}
 )
+
+
+add_dependencies(
+  ${PROJECT_NAME}
+  ${catkin_EXPORTED_TARGETS}
+)
+
+
+#############
+## Install ##
+#############
 
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
 install(DIRECTORY config launch

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <!-- Name of the robot description parameter -->
+  <arg name="description_name" default="tosman_description"/>
+
+  <!-- Set to true for simulation -->
+  <arg name="simulation" default="false"/>
+
+  <!-- The output can either be screen, log or an empty string -->
+  <arg name="output" default="screen"/>
+
+  <!-- Console launch prefix -->
+  <arg name="launch_prefix" default="nice -n -20"/>
+
+  <!-- Controllers -->
+  <arg name="controllers_file"  default="$(find tosman_controller_frame)/config/controllers.yaml" />
+
+
+  <!-- Load configuration files -->
+  <rosparam command="load" ns="tosman_controller_frame" file="$(find tosman_controller_frame)/config/parameters.yaml"/>
+  <rosparam command="load" ns="tosman_controller_frame" file="$(arg controllers_file)"/>
+  <rosparam command="load" ns="tosman_controller_frame" file="$(find tosman_controller_frame)/config/publishers.yaml"/>
+  <rosparam command="load" ns="tosman_controller_frame" file="$(find tosman_controller_frame)/config/subscribers.yaml"/>
+  <rosparam command="load" ns="tosman_controller_frame" file="$(find tosman_controller_frame)/config/services.yaml"/>
+
+  <!-- Load parameters from arguments -->
+  <param name="tosman_controller_frame/description_name" type="str" value="$(arg description_name)"/>
+  <param name="tosman_controller_frame/update_decimation" value="1"/>
+
+  <!-- Load simulation specific parameters -->
+  <param name="arac_controller_frame/controller/simulation"                   value="$(arg simulation)"/>
+  <param name="tosman_controller_frame/time_step"  value="0.0025" />
+
+  <!-- Launch the locomotion controller -->
+  <node name="tosman_controller_frame"
+        pkg="tosman_controller_frame"
+        type="tosman_controller_frame_node"
+        output="$(arg output)"
+        launch-prefix="$(arg launch_prefix)" />
+
+
+</launch>

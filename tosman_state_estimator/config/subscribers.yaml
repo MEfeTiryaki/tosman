@@ -1,0 +1,8 @@
+subscribers:
+  estimator:
+    topic: /state_estimator/kulman_state
+    queue_size: 10
+  imu:
+    topic: /imu
+    queue_size: 10
+    

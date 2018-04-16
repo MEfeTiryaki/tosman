@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Base -->
+  <xacro:macro name="tosman_base"  params="name **properties">
+
+    <!-- Xacro:Properties-->
+    <xacro:insert_block name="properties"/>
+
+
+    <!-- Attach the robot to the world link if requested -->
+    <xacro:if value="$(arg fixed)">
+      <gazebo>
+        <joint name="world_joint" type="fixed">
+          <parent>${name}</parent>
+          <child>world</child>
+        </joint>
+      </gazebo>
+    </xacro:if>
+
+    <!-- Base link -->
+    <link name="${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${collision_body_h}" radius="${collision_body_r}" />
+        </geometry>
+        <material name="tosman_material" />
+      </visual>
+      <collision> <!-- Main Body -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="${collision_body_h}" radius="${collision_body_r}" />
+        </geometry>
+      </collision>
+    </link>
+
+    <link name="dummy_wheel_front">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <sphere  radius="0.01" />
+        </geometry>
+        <material name="tosman_material" />
+      </visual>
+      <collision> <!-- Main Body -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <sphere  radius="0.05" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="dummy_wheel_hint">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <sphere  radius="0.01" />
+        </geometry>
+        <material name="tosman_material" />
+      </visual>
+      <collision> <!-- Main Body -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <sphere  radius="0.05" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${name}_to_dummy_wheel_front" type="fixed">
+      <parent link="${name}"/>
+      <child link="dummy_wheel_front"/>
+      <origin xyz="0.15 0 -0.05" rpy="0 0 0"/>
+    </joint>
+    <joint name="${name}_to_dummy_wheel_hint" type="fixed">
+      <parent link="${name}"/>
+      <child link="dummy_wheel_hint"/>
+      <origin xyz="-0.15 0 -0.05" rpy="0 0 0"/>
+    </joint>
+    <gazebo reference="dummy_wheel_front" >
+    	<kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
+        <fdir1 value="1 0 0"/>
+        <minDepth> 0.001 </minDepth>
+        <maxVel>100.0</maxVel>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="dummy_wheel_hint" >
+    	<kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
+        <fdir1 value="1 0 0"/>
+        <minDepth> 0.001 </minDepth>
+        <maxVel>100.0</maxVel>
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    
+    
+    <!-- Fixed joint to add dummy inertia link -->
+    <joint name="${name}_to_${name}_inertia" type="fixed">
+      <parent link="${name}"/>
+      <child link="${name}_inertia"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Dummy inertia link, because KDL cannot have inertia on the base link -->
+    <link name="${name}_inertia">
+      <inertial>
+        <origin   xyz="0 0 0"
+                  rpy="0 0 0"/>
+        <mass     value="${m_B}"/>
+        <inertia  ixx="${B_Ixx_B}" ixy="${B_Ixy_B}" ixz="${B_Ixz_B}"
+                  iyy="${B_Iyy_B}" iyz="${B_Iyz_B}" izz="${B_Izz_B}"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+</robot>

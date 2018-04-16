@@ -12,7 +12,7 @@ namespace gazebo {
 
 // Note : param_io is needed to use the getParam
 using namespace param_io;
-TosmanGazeboPlugin::AraTosmanGazeboPluginc2GazeboPlugin()
+TosmanGazeboPlugin::TosmanGazeboPlugin()
     : KulmanGazeboPlugin()
 {
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo>
+      <plugin name="gazebo_ros_control"
+        filename="libtosman_gazebo.so">
+        <robotNamespace>tosman</robotNamespace> <!-- Currently unused -->
+        <robotDescription>tosman_description</robotDescription>
+        <robotBaseLink>base</robotBaseLink>
+        <statePublisherRate>400.0</statePublisherRate>
+      </plugin>
+    </gazebo>
+
+</robot>

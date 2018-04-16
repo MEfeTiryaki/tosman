@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(arac)
+project(tosman)
 
 add_definitions("-std=c++11")
 
