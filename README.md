@@ -1,2 +1,2 @@
 # tosman
-2 Wheelli ayrık sürüş ile sürülen kulman benzetimi
+2 Tekerlekli ayrık sürüş ile sürülen kulman benzetimi
