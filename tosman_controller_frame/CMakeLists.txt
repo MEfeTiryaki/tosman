@@ -8,8 +8,9 @@ find_package(Boost REQUIRED COMPONENTS thread chrono)
 find_package(catkin REQUIRED
   COMPONENTS
   	tosman_model
-	  arac_msgs
-    arac_joystick
+	  kulman_msgs
+    kulman_controller_frame
+    kulman_joystick
     tosman_controller
     tosman_state_estimator
     roscpp
@@ -30,8 +31,9 @@ catkin_package(
   	tosman_controller_frame
   CATKIN_DEPENDS
   	tosman_model
-  	arac_msgs
-    arac_joystick
+    kulman_controller_frame
+  	kulman_msgs
+    kulman_joystick
     tosman_controller
     tosman_state_estimator
   	roscpp

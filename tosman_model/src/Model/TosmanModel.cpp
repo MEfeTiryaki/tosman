@@ -11,12 +11,12 @@ namespace kuco {
 // Note : param_io is needed to use the getParam
 
 TosmanModel::TosmanModel()
-    : tekerlekL_(new Tekerlek()),
-      tekerlekR_(new Tekerlek()),
-      tekerlekler_(new std::vector<Tekerlek*>())
+    : WheelL_(new Wheel()),
+      WheelR_(new Wheel()),
+      Wheels_(new std::vector<Wheel*>())
 {
-  tekerlekler_->push_back(tekerlekL_);
-  tekerlekler_->push_back(tekerlekR_);
+  Wheels_->push_back(WheelL_);
+  Wheels_->push_back(WheelR_);
 }
 
 TosmanModel::~TosmanModel()
@@ -31,7 +31,7 @@ void TosmanModel::create()
 {
 }
 
-void TosmanModel::advance()
+void TosmanModel::advance(double dt)
 {
 }
 
@@ -39,18 +39,18 @@ void TosmanModel::reset()
 {
 }
 
-//void AracModel::setTekerlekler(std::vector<Tekerlek>& tekerlek)
+//void AracModel::setWheels(std::vector<Wheel>& Wheel)
 //{
-//  tekerlekler_= tekerlek;
+//  Wheels_= Wheel;
 //}
-//std::vector<Tekerlek>& AracModel::getTekerlekler()
+//std::vector<Wheel>& AracModel::getWheels()
 //{
-//  return *tekerlekler_;
+//  return *Wheels_;
 //}
 
-std::vector<Tekerlek*>& TosmanModel::getTekerlek()
+std::vector<Wheel*>& TosmanModel::getWheel()
 {
-  return *tekerlekler_;
+  return *Wheels_;
 }
 
 } /* namespace */

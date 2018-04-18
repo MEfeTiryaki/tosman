@@ -47,13 +47,13 @@ void TosmanOLController::readParameters()
 void TosmanOLController::getState()
 {
   // Todo : Burayi Kulman konacligina cevirmek gerekiyor
-  x_[0] = model_.getGovde().getDesiredState().getVelocityInWorldFrame()[0];
-  x_[1] = model_.getGovde().getDesiredState().getAngularVelocityInWorldFrame()[2];
+  x_[0] = model_.getBody().getDesiredState().getVelocityInWorldFrame()[0];
+  x_[1] = model_.getBody().getDesiredState().getAngularVelocityInWorldFrame()[2];
 }
 
 void TosmanOLController::setActuatorCommand()
 {
-  std::vector<Tekerlek*>& wheels = model_.getTekerlek();
+  std::vector<Wheel*>& wheels = model_.getWheel();
   kuco::AngularVelocity input;
 
   // L

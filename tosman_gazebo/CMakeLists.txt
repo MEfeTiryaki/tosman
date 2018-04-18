@@ -5,15 +5,15 @@ add_definitions(-std=c++11)
 
 find_package(catkin REQUIRED
   COMPONENTS
-  arac_gazebo
-    param_io
-    arac_msgs
-    gazebo_plugins
-    gazebo_ros
-    roscpp
-    urdf
-    xacro
-    tf
+  kulman_gazebo
+  kulman_msgs
+  param_io
+  gazebo_plugins
+  gazebo_ros
+  roscpp
+  urdf
+  xacro
+  tf
 )
 
 find_package(gazebo REQUIRED)
@@ -31,22 +31,22 @@ link_directories(
 
 catkin_package(
   INCLUDE_DIRS
-    include
-    ${GAZEBO_INCLUDE_DIRS}
+  include
+  ${GAZEBO_INCLUDE_DIRS}
   LIBRARIES
-    ${PROJECT_NAME}
+  ${PROJECT_NAME}
   CATKIN_DEPENDS
-  arac_gazebo
-    param_io
-    arac_msgs
-    gazebo_plugins
-    urdf
-    xacro
+  kulman_gazebo
+  param_io
+  kulman_msgs
+  gazebo_plugins
+  urdf
+  xacro
   DEPENDS
-  	roscpp
-  	gazebo_ros
-    Boost
-    tf
+	roscpp
+	gazebo_ros
+  Boost
+  tf
 )
 
 add_library(

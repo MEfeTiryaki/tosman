@@ -17,19 +17,24 @@
 
 #include <param_io/get_param.hpp>
 
-#include "arac_joystick/JoystickAcc.hpp"
+#include "kulman_controller_frame/KulmanControllerFrame.hpp"
+#include "kulman_joystick/JoystickAcc.hpp"
 #include "tosman_controller/TosmanOLController.hpp"
-#include "arac_msgs/ActuatorCommands.h"
-#include "arac_model/State/State.hpp"
+#include "kulman_msgs/ActuatorCommands.h"
 #include "tosman_model/Model/TosmanModel.hpp"
 #include "tosman_state_estimator/TosmanEKF.hpp"
 
 // stl
 #include <memory>
 
-namespace tosman_controller_frame {
+namespace kuco {
 
-class TosmanControllerFrame
+using KulmanModel_ = kuco::TosmanModel;
+using Controller_ = kuco::TosmanOLController;
+using Estimator_ = estimator::TosmanEKF;
+using Joystick_ = joystick::JoystickAcc<KulmanModel_>;
+
+class TosmanControllerFrame : public KulmanControllerFrame<KulmanModel_,Controller_,Estimator_,Joystick_>
 {
  public:
   // Constructor.
@@ -39,69 +44,13 @@ class TosmanControllerFrame
   virtual ~TosmanControllerFrame();
 
   // Init
-  virtual void initilize(int argc, char **argv);
+  virtual void initilize(int argc, char **argv) override;
 
-  // Create
-  virtual void create();
-
-  // Parameters init
-  virtual void readParameters();
-
-  // Update
-  virtual void update();
-
-  // excute
-  virtual void execute();
-
-  // excute
-  virtual void advance();
+  virtual void create() override ;
 
  protected:
 
-
-  virtual void initilizePublishers();
-
-  virtual void initilizeSubscribers();
-
-  virtual void setActuatorCommand();
-
-  void createActuatorCommand();
-
- private:
-
-  ros::NodeHandle* nodeHandle_;
-
-  ros::Rate* loop_rate_;
-
-  std::string nodeName_;
-  std::string robotName_;
-
-  estimator::TosmanEKF* estimator_;
-  joystick::JoystickAcc<kuco::TosmanModel>* joystickHandler_ ;
-  kuco::TosmanOLController* controller_ ;
-  kuco::State* state_;
-  kuco::TosmanModel* model_;
-
-
-  // Publisher
-  ros::Publisher actuatorCommandPublisher_;
-  // Publisher names
-  std::string actuatorCommandPublisherName_;
-  // Publisher queue_size
-  int actuatorCommandPublisherQueueSize_;
-  // Publisher msgs
-  arac_msgs::ActuatorCommands actuatorCommand_;
-
-
-  double joystickCommandStartTime_;
-
-
-
-  std::vector<std::string> jointNames_;
-  std::vector<double> jointPositions_;
-  std::vector<double> jointVelocities_;
-  std::vector<double> jointEffort_;
-
+  void setActuatorCommand() override;
 
 };
 

@@ -5,7 +5,7 @@ add_definitions("-std=c++11")
 
 find_package(catkin REQUIRED
   COMPONENTS
-  arac_model
+    kulman_model
 )
 
 
@@ -20,7 +20,7 @@ catkin_package(
    tosman_model
   CATKIN_DEPENDS
   DEPENDS
-  arac_model
+    kulman_model
 )
 
 

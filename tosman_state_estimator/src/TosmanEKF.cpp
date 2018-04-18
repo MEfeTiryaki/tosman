@@ -57,7 +57,7 @@ void TosmanEKF::initilize(ros::NodeHandle* nh)
   time_ = ros::Time::now().toSec();
 }
 
-void TosmanEKF::advance()
+void TosmanEKF::advance(double dt)
 {
 
   getInput();
@@ -86,10 +86,10 @@ void TosmanEKF::advance()
   angularVelocityWorldToBaseInWorldFrame_[2] = kulmanStateMsg_.twist.twist.angular.z;
 
   // Kestirilen konum,yönelim ve hızları ölçülen duruma ata.
-  model_.getGovde().getMeasuredState().setPositionInWorldFrame(positionWorldToBase_);
-  model_.getGovde().getMeasuredState().setOrientationInWorldFrame(orientationWorldToBase_);
-  model_.getGovde().getMeasuredState().setVelocityInWorldFrame(velocityWorldToBaseInWorldFrame_);
-  model_.getGovde().getMeasuredState().setAngularVelocityInWorldFrame(
+  model_.getBody().getMeasuredState().setPositionInWorldFrame(positionWorldToBase_);
+  model_.getBody().getMeasuredState().setOrientationInWorldFrame(orientationWorldToBase_);
+  model_.getBody().getMeasuredState().setVelocityInWorldFrame(velocityWorldToBaseInWorldFrame_);
+  model_.getBody().getMeasuredState().setAngularVelocityInWorldFrame(
       angularVelocityWorldToBaseInWorldFrame_);
 
       /*
@@ -116,21 +116,21 @@ void TosmanEKF::readParameters()
   ptr = &P[0];
   Pm_.diagonal() << Eigen::Map<Eigen::VectorXd>(ptr, n_);
 
-  std::cout << "P_m : \n" << Pm_ << std::endl;
+  //std::cout << "P_m : \n" << Pm_ << std::endl;
 
   std::vector<double> Q;
   if (!nodeHandle_->getParam("estimatorParameters/Q", Q))
     ROS_ERROR("Estimator failed to find Q matrix");
   ptr = &Q[0];
   Q_.diagonal() << Eigen::Map<Eigen::VectorXd>(ptr, n_);
-  std::cout << "Q : \n" << Q_ << std::endl;
+  //std::cout << "Q : \n" << Q_ << std::endl;
 
   std::vector<double> R;
   if (!nodeHandle_->getParam("estimatorParameters/R", R))
     ROS_ERROR("Estimator failed to find R matrix");
   ptr = &R[0];
   R_.diagonal() << Eigen::Map<Eigen::VectorXd>(ptr, m_);
-  std::cout << "R : \n" << R_ << std::endl;
+  //std::cout << "R : \n" << R_ << std::endl;
 
 }
 
@@ -193,9 +193,9 @@ void TosmanEKF::getSensorData()
 
 void TosmanEKF::getInput()
 {
-  // XXX : Tekerlek hizlarini aldim ama buralar karisik yine
-  U_[0] = model_.getTekerlek()[0]->getDesiredState().getAngularVelocityInWorldFrame()[2];
-  U_[1] = model_.getTekerlek()[1]->getDesiredState().getAngularVelocityInWorldFrame()[2];
+  // XXX : Wheel hizlarini aldim ama buralar karisik yine
+  U_[0] = model_.getWheel()[0]->getDesiredState().getAngularVelocityInWorldFrame()[2];
+  U_[1] = model_.getWheel()[1]->getDesiredState().getAngularVelocityInWorldFrame()[2];
 }
 void TosmanEKF::pStep()
 {

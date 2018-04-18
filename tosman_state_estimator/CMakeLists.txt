@@ -7,7 +7,7 @@ find_package(catkin REQUIRED
   COMPONENTS
   kulman_state_estimator
   arac_state_estimator
-  arac_msgs
+  kulman_msgs
   tosman_model
   arac_model
   roscpp
@@ -36,9 +36,8 @@ catkin_package(
     ${PROJECT_NAME}
   CATKIN_DEPENDS
     kulman_state_estimator
-    arac_state_estimator
     tosman_model
-    arac_msgs
+    kulman_msgs
  	  arac_model
     roscpp
     param_io

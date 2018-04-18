@@ -12,8 +12,9 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <depend>tosman_model</depend>
-  <depend>arac_msgs</depend>
-  <depend>arac_joystick</depend>
+  <depend>kulman_msgs</depend>
+  <depend>kulman_controller_frame</depend>
+  <depend>kulman_joystick</depend>
   <depend>tosman_controller</depend>
   <depend>tosman_state_estimator</depend>
   <depend>roscpp</depend>

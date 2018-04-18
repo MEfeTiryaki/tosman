@@ -29,7 +29,7 @@ class TosmanPerfectEstimator : public KulmanStateEstimatorBase<Model>
 
   virtual void initilize(ros::NodeHandle* nh) override;
 
-  virtual void advance() override;
+  virtual void advance(double dt) override;
 
  private:
   kuco::Velocity positionWorldToBase_;

@@ -6,7 +6,7 @@
 
 // TODO : bunu kulmana gecir
 
-#include "arac_gazebo/KulmanGazeboPlugin.hpp"
+#include "kulman_gazebo/KulmanGazeboPlugin.hpp"
 
 namespace gazebo {
 class TosmanGazeboPlugin : public KulmanGazeboPlugin

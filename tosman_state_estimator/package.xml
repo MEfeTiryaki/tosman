@@ -18,9 +18,8 @@
   <depend>sensor_msgs</depend>
   <depend>tosman_model</depend>
   <depend>arac_model</depend>
-  <depend>arac_msgs</depend>
+  <depend>kulman_msgs</depend>
   <depend>kulman_state_estimator</depend>
-  <depend>arac_state_estimator</depend>
 
   <depend>boost</depend>
   <depend>eigen</depend>

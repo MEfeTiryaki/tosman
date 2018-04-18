@@ -119,7 +119,7 @@
   <!-- RVIZ -->
   <group if="$(arg run_rviz)">
     <!-- Launch node -->
-    <include file="$(find arac_rviz)/launch/rviz.launch">
+    <include file="$(find kulman_rviz)/launch/rviz.launch">
       <arg name="rviz_config_path" value="$(arg rviz_config_path)"/>
       <arg name="rviz_world_path"  value="$(arg rviz_world_path)"/>
       <arg name="tf_minimal"       value="$(arg tf_minimal)"/>
@@ -133,7 +133,6 @@
       <arg name="simulation"       value="true"/>
       <arg name="launch_prefix"    value="$(arg tosman_controller_frame_launch_prefix)"/>
       <arg name="description_name" value="$(arg kulman_description)"/>
-      <arg name="controllers_file" value="$(arg controllers_file)"/>
     </include>
 
 </launch>

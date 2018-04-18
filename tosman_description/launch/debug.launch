@@ -44,7 +44,7 @@
    <!-- RViz -->
    <group if="$(arg run_rviz)">
      <!-- Launch node -->
-     <include file="$(find arac_rviz)/launch/rviz.launch">
+     <include file="$(find kulman_rviz)/launch/rviz.launch">
        <arg name="rviz_config_path" value="$(arg rviz_config_path)"/>
        <arg name="rviz_world_path"  value="$(arg rviz_world_path)"/>
        <arg name="tf_minimal"       value="$(arg tf_minimal)"/>

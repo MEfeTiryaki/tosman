@@ -1,12 +1,12 @@
-// arac gazebo
+// tosman gazebo
 #include "tosman_controller_frame/TosmanControllerFrame.hpp"
 
-namespace tosman_controller_frame {
+namespace kuco {
 
 // Note : param_io is needed to use the getParam
 using namespace param_io;
 TosmanControllerFrame::TosmanControllerFrame():
-    loop_rate_(0)
+    KulmanControllerFrame<KulmanModel_,Controller_,Estimator_,Joystick_>()
 {
 
 }
@@ -17,114 +17,50 @@ TosmanControllerFrame::~TosmanControllerFrame()
 
 void TosmanControllerFrame::create()
 {
-  //state_ = new kuco::State();
-  model_ = new kuco::TosmanModel;
-  estimator_ = new estimator::TosmanEKF(*model_);
-  joystickHandler_ = new joystick::JoystickAcc<kuco::TosmanModel>(*model_);
-  controller_ = new kuco::TosmanOLController(*model_);
+  this->model_ = new kuco::TosmanModel;
+  this->estimator_ = new estimator::TosmanEKF(*model_);
+  this->joystickHandler_ = new joystick::JoystickAcc<kuco::TosmanModel>(*model_);
+  this->controller_ = new kuco::TosmanOLController(*model_);
 }
 
 void TosmanControllerFrame::initilize(int argc, char **argv)
 {
-  jointNames_.push_back("L_WH");
-  jointNames_.push_back("R_WH");
-  jointPositions_ = std::vector<double>(2, 0.0);
-  jointVelocities_ = std::vector<double>(2, 0.0);
-  jointEffort_ = std::vector<double>(2, 0.0);
+  // nodeHandler olusturuldu.
+  this->nodeName_ = "/tosman_controller_frame";
+  ros::init(argc, argv, nodeName_);
+  this->nodeHandle_ = new ros::NodeHandle("~");
+
+  // Parametreler okundu.
+  readParameters();
+
+  // loop rate ayarlandi
+  this->loop_rate_ = new ros::Rate(loopFrequency_);
+
+  this->jointPositions_ = std::vector<double>(n_, 0.0);
+  this->jointVelocities_ = std::vector<double>(n_, 0.0);
+  this->jointEffort_ = std::vector<double>(n_, 0.0);
   createActuatorCommand();
 
-  nodeName_ = "/Tosman_controller_frame";
-
-  ros::init(argc, argv, nodeName_);
-
-  nodeHandle_ = new ros::NodeHandle("~");
-
-  loop_rate_ = new ros::Rate(100);
-
-  readParameters();
   initilizePublishers();
   initilizeSubscribers();
 
-  model_->initilize();
-  joystickHandler_->initilize(nodeHandle_);
-  estimator_->initilize(nodeHandle_);
-  controller_->initilize();
+  this->model_->initilize();
+  this->joystickHandler_->initilize(nodeHandle_);
+  this->estimator_->initilize(nodeHandle_);
+  this->controller_->initilize();
 
-  std::cout << "Tosman_controller_frame::init " << std::endl;
-}
-
-void TosmanControllerFrame::update()
-{
-
-}
-
-void TosmanControllerFrame::execute()
-{
-  while (ros::ok()) {
-    advance();
-    ros::spinOnce();
-    loop_rate_->sleep();
-  }
-}
-
-void TosmanControllerFrame::advance()
-{
-
-  // Estimator here in future
-  estimator_->advance();
-
-  // Advance the joystick handler
-  joystickHandler_->advance();
-
-  // Advance the controller
-  controller_->advance();
-
-  // set actuator commands
-  setActuatorCommand();
-  // publish actuators
-  actuatorCommandPublisher_.publish(actuatorCommand_);
-
-}
-
-void TosmanControllerFrame::readParameters()
-{
-  // Get Publishers parameters
-  getParam(*nodeHandle_, "publishers/actuator_commands/topic", actuatorCommandPublisherName_);
-  getParam(*nodeHandle_, "publishers/actuator_commands/queue_size",
-           actuatorCommandPublisherQueueSize_);
-
-}
-
-void TosmanControllerFrame::initilizePublishers()
-{
-  std::cout << "Tosman_controller_frame::initilizePublishers" << std::endl;
-  actuatorCommandPublisher_ = nodeHandle_->advertise<arac_msgs::ActuatorCommands>(
-      actuatorCommandPublisherName_, actuatorCommandPublisherQueueSize_);
-
-}
-
-void TosmanControllerFrame::initilizeSubscribers()
-{
-
-}
-
-void TosmanControllerFrame::createActuatorCommand()
-{
-  actuatorCommand_.inputs.name = jointNames_;
-  actuatorCommand_.inputs.position = jointVelocities_;
-  actuatorCommand_.inputs.velocity = jointVelocities_;
-  actuatorCommand_.inputs.effort = jointEffort_;
-
+  print();
 }
 
 void TosmanControllerFrame::setActuatorCommand()
 {
   double wheelVelocities;
-  auto& tekerler = model_->getTekerlek();
+  auto& wheels = this->model_->getWheel();
   for (int i = 0; i < actuatorCommand_.inputs.velocity.size(); i++) {
-    wheelVelocities = tekerler[i]->getDesiredState().getAngularVelocityInWorldFrame()[2];
-    actuatorCommand_.inputs.velocity[i] = wheelVelocities;
+    wheelVelocities = wheels[i]->getDesiredState().getAngularVelocityInWorldFrame()[2];
+    this->actuatorCommand_.inputs.velocity[i] = wheelVelocities;
   }
 }
 
-} /* namespace tosman_controller_frame*/
+
+} /* namespace kuco*/

@@ -14,7 +14,7 @@ void TosmanPerfectEstimator::initilize(ros::NodeHandle* nh)
 
 }
 
-void TosmanPerfectEstimator::advance()
+void TosmanPerfectEstimator::advance(double dt)
 {
 //  positionWorldToBase_[0] = kulmanStateMsg_.;
 //  positionWorldToBase_[1] = kulmanStateMsg_.pose.pose.pos.y;
@@ -37,10 +37,10 @@ void TosmanPerfectEstimator::advance()
   angularVelocityWorldToBaseInWorldFrame_[2] = kulmanStateMsg_.twist.twist.angular.z;
 
   // Kestirilen konum,yönelim ve hızları ölçülen duruma ata.
-  model_.getGovde().getMeasuredState().setPositionInWorldFrame(positionWorldToBase_);
-  model_.getGovde().getMeasuredState().setOrientationInWorldFrame(orientationWorldToBase_);
-  model_.getGovde().getMeasuredState().setVelocityInWorldFrame(velocityWorldToBaseInWorldFrame_);
-  model_.getGovde().getMeasuredState().setAngularVelocityInWorldFrame(
+  model_.getBody().getMeasuredState().setPositionInWorldFrame(positionWorldToBase_);
+  model_.getBody().getMeasuredState().setOrientationInWorldFrame(orientationWorldToBase_);
+  model_.getBody().getMeasuredState().setVelocityInWorldFrame(velocityWorldToBaseInWorldFrame_);
+  model_.getBody().getMeasuredState().setAngularVelocityInWorldFrame(
       angularVelocityWorldToBaseInWorldFrame_);
 }
 

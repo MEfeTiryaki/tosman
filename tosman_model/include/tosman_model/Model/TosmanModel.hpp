@@ -7,7 +7,7 @@
 #pragma once
 
 #include "arac_model/Model/KulmanModel.hpp"
-#include "arac_model/Module/Tekerlek.hpp"
+#include "arac_model/Module/Wheel.hpp"
 #include <vector>
 
 namespace kuco {
@@ -23,22 +23,22 @@ class TosmanModel : public KulmanModel
 
   virtual void create();
 
-  virtual void advance();
+  virtual void advance(double dt);
 
   virtual void reset();
 
-  //void setTekerlek(Tekerlek tekerlek);
+  //void setWheel(Wheel Wheel);
 
-  std::vector<Tekerlek*>& getTekerlek();
+  std::vector<Wheel*>& getWheel();
 
 
  protected:
 
   // vector içinde pointer ne kadar doğru bir yaklaşım emin değilim ama dursun
-  Tekerlek* tekerlekL_;
-  Tekerlek* tekerlekR_;
+  Wheel* WheelL_;
+  Wheel* WheelR_;
 
-  std::vector<Tekerlek*>* tekerlekler_;
+  std::vector<Wheel*>* Wheels_;
 };
 
 } /* namespace kuco */

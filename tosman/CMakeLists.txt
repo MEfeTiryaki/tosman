@@ -11,11 +11,7 @@ find_package(catkin REQUIRED
   tosman_description
   tosman_gazebo
   tosman_model
-  arac_joystick
-  arac_msgs
-  arac_state_estimator
-  arac_rviz
-  param_io
+  tosman_state_estimator
 )
 
 catkin_package(
@@ -27,9 +23,5 @@ catkin_package(
   tosman_description
   tosman_gazebo
   tosman_model
-  arac_joystick
-  arac_msgs
-  arac_state_estimator
-  arac_rviz
-  param_io
+  tosman_state_estimator
 )

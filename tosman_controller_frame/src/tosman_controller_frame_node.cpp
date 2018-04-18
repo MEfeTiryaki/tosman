@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv)
 {
-  tosman_controller_frame::TosmanControllerFrame controllerFrame = tosman_controller_frame::TosmanControllerFrame();
+  kuco::TosmanControllerFrame controllerFrame = kuco::TosmanControllerFrame();
   controllerFrame.create();
   controllerFrame.initilize(argc,argv);
   controllerFrame.execute();

@@ -9,6 +9,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>kulman_gazebo</depend>
+  <depend>kulman_msgs</depend>
 
 
   <depend>boost</depend>
@@ -19,8 +21,7 @@
   <depend>gazebo_plugins</depend>
   <depend>urdf</depend>
   <depend>xacro</depend>
-  <depend>arac_msgs</depend>
-  <depend>arac_gazebo</depend>
+
 
   <depend>tf</depend>
 

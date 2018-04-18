@@ -1,7 +1,7 @@
 #pragma once
 
 #include "tosman_model/Model/TosmanModel.hpp"
-#include "arac_controller/LinearOpenLoopController.hpp"
+#include "kulman_controller/LinearOpenLoopController.hpp"
 #include <vector>
 
 namespace kuco {
@@ -29,9 +29,9 @@ class TosmanOLController : public LinearOpenLoopController<Model>
 
   virtual void setActuatorCommand() override;
 
-  // tekerlek yaricapi
+  // Wheel yaricapi
   double rWheel_ ;
-  // tekerlek uzakligi
+  // Wheel uzakligi
   double lWheel_ ;
 };
 

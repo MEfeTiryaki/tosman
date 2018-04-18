@@ -17,10 +17,6 @@
   <depend>tosman_gazebo</depend>
   <depend>tosman_model</depend>
   <depend>tosman_sim</depend>
-  <depend>arac_msgs</depend>
-  <depend>arac_joystick</depend>
-  <depend>arac_state_estimator</depend>
-  <depend>arac_rviz</depend>
-  <depend>param_io</depend>
-
+  <depend>tosman_state_estimator</depend>
+  
 </package>
