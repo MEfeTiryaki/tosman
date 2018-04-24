@@ -33,7 +33,7 @@ void TosmanOLController::initilize()
   x_.setZero(n_);
   u_.setZero(l_);
 
-  // Todo : arac icin B yi tanimla
+  // Todo : tosman icin B yi tanimla
   B_.setZero(l_, n_);
   B_.row(0) << -rWheel_ / 2, -rWheel_ / 2;
   B_.row(1) << rWheel_ / 2 / lWheel_, -rWheel_ / 2 / lWheel_;

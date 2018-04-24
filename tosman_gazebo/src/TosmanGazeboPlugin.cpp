@@ -5,7 +5,7 @@
 // param io
 #include <param_io/get_param.hpp>
 
-// arac gazebo
+// tosman gazebo
 #include "tosman_gazebo/TosmanGazeboPlugin.hpp"
 
 namespace gazebo {

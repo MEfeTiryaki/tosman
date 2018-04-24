@@ -5,10 +5,7 @@
     <gazebo>
       <plugin name="gazebo_ros_control"
         filename="libtosman_gazebo.so">
-        <robotNamespace>tosman</robotNamespace> <!-- Currently unused -->
-        <robotDescription>tosman_description</robotDescription>
-        <robotBaseLink>base</robotBaseLink>
-        <statePublisherRate>400.0</statePublisherRate>
+        <robot_name>$(arg robot_name)</robot_name> <!-- Currently unused -->
       </plugin>
     </gazebo>
 

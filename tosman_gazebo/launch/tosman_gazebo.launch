@@ -2,6 +2,14 @@
 
 <launch>
 
+
+  <arg name="robot_name"                            default="tosman_0000"/>
+
+  <!-- ESTIMATOR -->
+  <arg name="state_estimator_used"                  default="true"/>
+  <param name="gazebo/state_estimator_used"         value="$(arg state_estimator_used)"/>
+
+
   <!-- GAZEBO ARGUMENTS -->
   <!-- Run Gazebo headless -->
   <arg name="headless"                              default="false"/>
@@ -11,18 +19,20 @@
   <arg name="actuators_config_file"                 default="$(find tosman_gazebo)/config/actuators.yaml"/>
 
   <!-- Model path -->
-  <arg name="model_path"                            default="$(find tosman_gazebo)/world/.."/>
+  <arg name="model_path"                            default="$(find kulman_gazebo)/world/.."/>
   <!-- Name of the world -->
   <arg name="world"                                 default="empty"/>
-  <!-- TODO : world haritasini kulmana yolla -->
   <!-- Path to the world file -->
-  <arg name="world_file"                            default="$(find tosman_gazebo)/worlds/$(arg world).world"/>
-  <!-- Enable/disable state estimation messages from Gazebo -->
-  <arg name="simulate_estimator"                    default="true"/>
-  <!-- Set true to simulate sensors without noise and bias -->
-  <arg name="perfect_sensors"                       default="true"/>
-  <!-- Set true to fix the robot's main body -->
+  <arg name="world_file"                            default="$(find kulman_gazebo)/worlds/$(arg world).world"/>
+
+
+  <!-- True çevrilirse tosmanı sabitler -->
+  <!-- Set true to fix the tosman's main body in space -->
   <arg name="fixed"                                 default="false"/>
+
+  <arg name="paused"                                default="false"/>
+
+
   <!-- Set the initial pose of the robot's main body -->
   <arg name="x"                                     default="0.0"/>
   <arg name="y"                                     default="0.0"/>
@@ -30,18 +40,19 @@
   <arg name="roll"                                  default="0.0"/>
   <arg name="pitch"                                 default="0.0"/>
   <arg name="yaw"                                   default="0.0"/>
-  <!-- Start paused -->
-  <arg name="paused"                                default="false"/>
+
+  <!-- Frame offsets -->
+  <arg name="frame_odometry_offset_x"               default="0.0"/>
+  <arg name="frame_odometry_offset_y"               default="0.0"/>
+  <arg name="frame_odometry_offset_z"               default="0.0"/>
+
+
   <!-- Use simulation clock -->
   <arg name="use_sim_time"                          default="true"/>
   <!-- Debug mode -->
   <arg name="debug"                                 default="false"/>
   <!-- Verbose mode -->
-  <arg name="verbose"                               default="true"/>
-  <!-- Frame offsets -->
-  <arg name="frame_odometry_offset_x"               default="0.0"/>
-  <arg name="frame_odometry_offset_y"               default="0.0"/>
-  <arg name="frame_odometry_offset_z"               default="0.0"/>
+  <arg name="verbose"                               default="false"/>
 
   <!-- GUI ARGUMENTS -->
   <!-- Enable/disable Gazebo GUI -->
@@ -52,6 +63,8 @@
   <arg name="description_name"                      default="tosman_description"/>
   <!-- Path of robot description -->
   <arg name="description_file"                      default="$(find tosman_description)/urdf/tosman.urdf.xacro"/>
+
+
 
   <!-- Load parameters -->
   <rosparam command="load" ns="gazebo" file="$(arg actuators_config_file)" />
@@ -79,6 +92,7 @@
 
   <!-- Load robot description -->
   <include file="$(find tosman_description)/launch/load.launch">
+    <arg name="robot_name"       value="$(arg robot_name)"/>
     <arg name="simulation"       value="true"/>
     <arg name="fixed"            value="$(arg fixed)"/>
     <arg name="description_name" value="$(arg description_name)"/>
@@ -86,8 +100,8 @@
   </include>
 
   <!-- Spawn robot in Gazebo -->
-  <node name="spawn_arac" pkg="gazebo_ros" type="spawn_model"
-    args="-param $(arg description_name) -urdf -model arac -x $(arg x)
+  <node name="$(arg robot_name)_spawn" pkg="gazebo_ros" type="spawn_model"
+    args="-param $(arg description_name) -urdf -model $(arg robot_name) -x $(arg x)
       -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"
     output="screen"/>
 

@@ -1,8 +1,0 @@
-subscribers:
-  kulman_state:
-    topic: /state_estimator/kulman_state
-    queue_size: 10
-    latch: false
-  joystick:
-    topic: /turtle1/cmd_vel
-    queue_size: 10

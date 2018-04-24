@@ -1,0 +1,5 @@
+publishers:
+  kulman_state:
+    topic: _state_estimator/kulman_state
+    queue_size: 10
+    latch: false

@@ -17,7 +17,6 @@
   <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>tosman_model</depend>
-  <depend>arac_model</depend>
   <depend>kulman_msgs</depend>
   <depend>kulman_state_estimator</depend>
 

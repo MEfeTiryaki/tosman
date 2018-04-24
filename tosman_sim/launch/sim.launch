@@ -4,75 +4,105 @@
 
   <!-- ROBOT SPECIFIC ARGUMENTS -->
   <!-- Robot description name -->
-  <arg name="kulman_description"                  default="tosman_description"/>
-  <!-- Set the name of the robot -->
-  <arg name="robot_name"                          default="tosman"/>
-  <!-- Set robot description path -->
-  <arg name="description_file"                    default="$(find tosman_description)/urdf/tosman.urdf.xacro"/>
+  <arg name="kulman_description"                        default="tosman_description"/>
 
+  <!-- KULMAN KİMLİK -->
+  <!-- ROBOT ID -->
+  <arg name="robot_id"                                  default="0001"/>
+
+  <!-- Set the name of the robot -->
+  <arg name="robot_name"                                default="tosman_$(arg robot_id)"/>
+  <!-- Set robot description path -->
+  <arg name="description_file"                          default="$(find tosman_description)/urdf/tosman.urdf.xacro"/>
+
+  <!-- DEĞİÇKENLER -->
+  <!-- PARAMETERS -->
+  <!-- TODO : Kullanılıyor mu bak...         //  Set global simulation parameter -->
+  <arg name="simulation"                                default="true"/>
 
 
   <!-- GAZEBO ARGUMENTS -->
+
+  <!-- TODO : Bunun ne olduğunu öğren -->
   <!-- Run Gazebo headless -->
-  <arg name="gazebo_headless"                         default="false"/>
+  <arg name="gazebo_headless"                           default="false"/>
+
   <!-- Model path -->
   <!-- If the world is not found in a "linked" devel space layout (see catkin config), this might help: -->
-  <arg name="model_path"                              default="$(find tosman_gazebo)/.."/>
-  <!-- Name of the world -->
-  <arg name="world"                                   default="empty"/>
+  <arg name="model_path"                                default="$(find tosman_gazebo)/.."/>
+
+
+  <!-- DÜNYA HARİTASI -->
+  <!-- WORLD MAP -->
+  <arg name="world"                                     default="empty"/>
   <!-- Path to the world file -->
-  <arg name="world_file"                              default="$(find tosman_gazebo)/worlds/$(arg world).world"/>
-  <!-- Set true to fix the robot's main body in space -->
-  <arg name="fixed"                                   default="false"/>
+  <arg name="world_file"                                default="$(find kulman_gazebo)/worlds/$(arg world).world"/>
+
+  <!-- True çevrilirse tosmanı sabitler -->
+  <!-- Set true to fix the tosman's main body in space -->
+  <arg name="fixed"                                     default="false"/>
+
+  <!-- Aracın konaclıgının  Dünya konaçlığına göre başlangıc konumu ve yönelmesi -->
   <!-- Set the initial pose of the robot's main body -->
-  <arg name="x"                                       default="0.0"/>
-  <arg name="y"                                       default="0.0"/>
-  <arg name="z"                                       default="0.0"/>
-  <arg name="roll"                                    default="0.0"/>
-  <arg name="pitch"                                   default="0.0"/>
-  <arg name="yaw"                                     default="0.0"/>
+  <arg name="x"                                         default="0.0"/>
+  <arg name="y"                                         default="0.0"/>
+  <arg name="z"                                         default="0.0"/>
+  <arg name="roll"                                      default="0.0"/>
+  <arg name="pitch"                                     default="0.0"/>
+  <arg name="yaw"                                       default="0.0"/>
+
+  <!-- TODO : NE işe yarıyor.  -->
   <!-- Frame offsets -->
-  <arg name="frame_odometry_offset_x"                 default="0.0"/>
-  <arg name="frame_odometry_offset_y"                 default="0.0"/>
-  <arg name="frame_odometry_offset_z"                 default="0.0"/>
+  <arg name="frame_odometry_offset_x"                   default="0.0"/>
+  <arg name="frame_odometry_offset_y"                   default="0.0"/>
+  <arg name="frame_odometry_offset_z"                   default="0.0"/>
 
 
 
+  <!-- GKA Değişkenleri -->
   <!-- GUI ARGUMENTS -->
+
+  <!-- Gazebo GKA'nü Açar/Kapar -->
   <!-- Enable/disable Gazebo GUI -->
-  <arg name="run_gazebo_gui"                          default="false"/>
+  <arg name="run_gazebo_gui"                            default="false"/>
+
+  <!-- Rviz Açar/Kapar -->
   <!-- Enable/disable rviz -->
-  <arg name="run_rviz"                                default="true"/>
+  <arg name="run_rviz"                                  default="true"/>
   <!-- rviz configuration -->
-  <arg name="rviz_config_path"                        default="$(find tosman_sim)/config/rviz/tosman.rviz"/>
+  <arg name="rviz_config_path"                          default="$(find tosman_sim)/config/rviz/tosman.rviz"/>
+
+  <!-- TODO : NE işe yarıyor.  -->
   <!-- Path to the RViz world -->
-  <arg name="rviz_world_path"                         default="$(find tosman_gazebo)/rviz/$(arg world).yaml"/>
+  <arg name="rviz_world_path"                           default="$(find tosman_gazebo)/rviz/$(arg world).yaml"/>
 
 
-
+  <!-- DÖNÜŞÜM DEĞİÇKENLERİ -->
   <!-- TF PARAMETERS -->
+  <!-- TODO : tf_prefix NE işe yarıyor.  -->
   <!-- tf prefix -->
-  <arg name="tf_prefix"                         default=""/>
+  <arg name="tf_prefix"                                 default=""/>
+  <!-- TODO : tf_minimal NE işe yarıyor.  -->
   <!-- tf minimal -->
   <arg name="tf_minimal"                                default="false"/>
-  <!-- Simulation joint states publisher -->
-  <arg name="simulation_joint_states_topic" default="/state_estimator/simulation_joint_states"/>
-  <!-- Joint state topic name -->
-  <arg name="joint_states_topic" default="/state_estimator/joint_states"/>
+  <!-- TODO : simulation_joint_states_topic düzgün kullanılıyor mu ?  -->
+  <!-- Benzetim mafsal durum yayınlayıcı     // Simulation joint states publisher -->
+  <arg name="simulation_joint_states_topic"             default="[/state_estimator/simulation_joint_states]"/>
+  <!-- Mafsal durum konusu adı               // Joint state topic name -->
+  <arg name="joint_states_topic"                        default="/state_estimator/joint_states"/>
 
-
-
+  <!-- GÜDÜMCÜ ÇATISI DEĞİÇKENLERİ -->
   <!-- CONTROLLER FRAME PARAMETERS -->
-  <!-- Launch prefix for the arac controller frame -->
-  <arg name="tosman_controller_frame_launch_prefix"      default=""/>
-  <!-- File where the controllers to load are specified -->
-  <arg name="controllers_file"          default="$(find tosman_sim)/config/controllers/controllers.yaml"/>
+  <!-- Launch prefix for the tosman controller frame -->
+  <arg name="tosman_controller_frame_launch_prefix"       default=""/>
 
 
+  <!-- ESTIMATOR PARAMETERS -->
+  <arg name="tosman_state_estimator_launch_prefix"        default=""/>
 
-  <!-- PARAMETERS -->
-  <!-- Set global simulation parameter -->
-  <param name="/simulation" value="true"/>
+  <!-- Durum Kestirimcisini devre dışı bırakır ve gazebodan gelen durumu kullanır. Bu durum gazebo_plugin içinde yayınlanıyor olmalıdır.                    //  This disarm state estimator and uses state data coming from gazeno. The gazebo_plugin must publish this state
+  -->
+  <arg name="state_estimator_used"                      default="true"/>
 
 
 
@@ -95,44 +125,62 @@
     <arg name="run_gui"                             value="$(arg run_gazebo_gui)"/>
     <arg name="description_name"                    value="$(arg kulman_description)"/>
     <arg name="description_file"                    value="$(arg description_file)"/>
+    <arg name="robot_name"                          value="$(arg robot_name)"/>
+    <arg name="state_estimator_used"                value="$(arg state_estimator_used)"/>
   </include>
 
 
-  <!--  Joint State and TF publishers for Rviz Virtualization  -->
-  <node name="tosman_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
-    <param name="use_gui"           value="false"/>
-    <param name="rate"              value="100"/>
-    <rosparam param="source_list">["/state_estimator/simulation_joint_states"]</rosparam>
-    <remap from="robot_description" to="$(arg kulman_description)"/>
-    <remap from="joint_states"      to="$(arg joint_states_topic)"/>
+  <!--  XXX : Rviz gösterimi için Mafsal Durumu yayınlayıcı   -->
+  <!--  Joint State and TF publishers for Rviz Virtualization   -->
+  <node name="$(arg robot_name)_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+    <param name="use_gui"                   value="false"/>
+    <param name="rate"                      value="100"/>
+    <rosparam param="source_list" subst_value="True">$(arg simulation_joint_states_topic)</rosparam>
+    <remap from="robot_description"         to="$(arg kulman_description)"/>
+    <remap from="joint_states"              to="$(arg joint_states_topic)"/>
   </node>
-  <node ns="tosman_tf_publisher" name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
-    <param name="publish_frequency" value="100"/>
-    <param name="use_tf_static"     value="true"/>
-    <param name="tf_prefix"         value="$(arg tf_prefix)"/>
-    <remap from="robot_description" to="$(arg kulman_description)"/>
-    <remap from="joint_states"      to="$(arg joint_states_topic)"/>
+
+  <!--  XXX : Rviz gösterimi için TF yayınlayıcı   -->
+  <node name="$(arg robot_name)_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+    <param name="publish_frequency"         value="100"/>
+    <param name="use_tf_static"             value="true"/>
+    <param name="tf_prefix"                 value="$(arg tf_prefix)"/>
+    <remap from="robot_description"         to="$(arg kulman_description)"/>
+    <remap from="joint_states"              to="$(arg joint_states_topic)"/>
   </node>
 
 
 
   <!-- RVIZ -->
   <group if="$(arg run_rviz)">
-    <!-- Launch node -->
     <include file="$(find kulman_rviz)/launch/rviz.launch">
-      <arg name="rviz_config_path" value="$(arg rviz_config_path)"/>
-      <arg name="rviz_world_path"  value="$(arg rviz_world_path)"/>
-      <arg name="tf_minimal"       value="$(arg tf_minimal)"/>
+      <arg name="rviz_config_path"          value="$(arg rviz_config_path)"/>
+      <arg name="rviz_world_path"           value="$(arg rviz_world_path)"/>
+      <arg name="tf_minimal"                value="$(arg tf_minimal)"/>
     </include>
   </group>
 
 
-
-  <!-- CONTROLLER FRAME -->
-    <include file="$(find tosman_controller_frame)/launch/tosman_controller_frame.launch">
-      <arg name="simulation"       value="true"/>
-      <arg name="launch_prefix"    value="$(arg tosman_controller_frame_launch_prefix)"/>
-      <arg name="description_name" value="$(arg kulman_description)"/>
+  <!-- DURUM KESTİRİMCİSİ -->
+  <!-- STATE ESTIMATOR -->
+  <group if="$(arg state_estimator_used)">
+    <include file="$(find tosman_state_estimator)/launch/tosman_state_estimator.launch">
+      <arg name="robot_name"                value="$(arg robot_name)"/>
+      <arg name="simulation"                value="$(arg simulation)"/>
+      <arg name="launch_prefix"             value="$(arg tosman_state_estimator_launch_prefix)"/>
+      <arg name="description_name"          value="$(arg kulman_description)"/>
     </include>
+  </group>
+
+
+  <!-- GÜDÜMCÜ ÇATISI -->
+  <!-- CONTROLLER FRAME -->
+  <include file="$(find tosman_controller_frame)/launch/tosman_controller_frame.launch">
+    <arg name="robot_name"                  value="$(arg robot_name)"/>
+    <arg name="simulation"                  value="$(arg simulation)"/>
+    <arg name="launch_prefix"               value="$(arg tosman_controller_frame_launch_prefix)"/>
+    <arg name="description_name"            value="$(arg kulman_description)"/>
+    <arg name="state_estimator_used"        value="$(arg state_estimator_used)"/>
+  </include>
 
 </launch>

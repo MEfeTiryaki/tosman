@@ -13,8 +13,7 @@
 #include <memory>
 #include <mutex>
 
-#include "arac_model/State/State.hpp"
-#include "tosman_model/Model/TosmanModel.hpp"
+#include "tosman_model/TosmanModel.hpp"
 
 #include "kulman_state_estimator/KulmanStateEstimatorBase.hpp"
 
@@ -38,8 +37,9 @@ class TosmanEKF : public KulmanStateEstimatorBase<Model>
   virtual void initilizeSubscribers() override ;
   virtual void initilizePublishers() override ;
   // Todo : Bunu disari al bir sekilde
-  virtual void publish();
+  virtual void publishVisualization();
 
+  virtual void publishEstimatedState() override ;
   void getImuMsg(sensor_msgs::Imu msg ) ;
 
   // Subscriber

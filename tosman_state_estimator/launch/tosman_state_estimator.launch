@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <!-- Name of the robot  -->
+  <arg name="robot_name" default="tosman0000"/>
+
+  <!-- Name of the robot description parameter -->
+  <arg name="description_name" default="tosman_description"/>
+
+  <!-- Set to true for simulation -->
+  <arg name="simulation" default="false"/>
+
+  <!-- The output can either be screen, log or an empty string -->
+  <arg name="output" default="screen"/>
+
+  <!-- Console launch prefix -->
+  <arg name="launch_prefix" default="nice -n -20"/>
+
+
+  <!-- Load configuration files -->
+  <rosparam command="load" ns="$(arg robot_name)_state_estimator" file="$(find tosman_state_estimator)/config/parameters.yaml"/>
+  <rosparam command="load" ns="$(arg robot_name)_state_estimator" file="$(find tosman_state_estimator)/config/publishers.yaml"/>
+  <rosparam command="load" ns="$(arg robot_name)_state_estimator" file="$(find tosman_state_estimator)/config/subscribers.yaml"/>
+  <rosparam command="load" ns="$(arg robot_name)_state_estimator" file="$(find tosman_state_estimator)/config/services.yaml"/>
+
+  <!-- Load parameters from arguments -->
+  <param name="$(arg robot_name)_state_estimator/description_name" type="str" value="$(arg description_name)"/>
+  <param name="$(arg robot_name)_state_estimator/update_decimation" value="1"/>
+
+  <!-- Load simulation specific parameters -->
+  <param name="$(arg robot_name)_state_estimator/robot_name"                   value="$(arg robot_name)"/>
+  <param name="$(arg robot_name)_state_estimator/controller/simulation"                   value="$(arg simulation)"/>
+  <param name="$(arg robot_name)_state_estimator/time_step"  value="0.001" />
+
+  <!-- Launch the locomotion controller -->
+  <node name="$(arg robot_name)_state_estimator"
+        pkg="tosman_state_estimator"
+        type="tosman_state_estimator_node"
+        output="$(arg output)"
+        launch-prefix="$(arg launch_prefix)" />
+
+
+</launch>

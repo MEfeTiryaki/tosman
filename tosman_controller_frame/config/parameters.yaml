@@ -3,15 +3,9 @@ controllerGains:
   Derivative   : [ 1.0 , 1.0 ]
   Integral     : [ 1.0 , 1.0 ]
 
-estimatorParameters:
-  P : [ 1.0 , 1.0  , 1.0 , 1.0 , 1.0 , 1.0 ]
-  Q : [ 1.0 , 1.0  , 1.0 , 1.0 , 1.0 , 1.0 ]
-  R : [ 1.0 , 1.0  , 1.0 , 1.0 , 1.0 , 1.0 ]
-
 
 joints :
   jointNumber : 2
   jointNames:
     - L_WH
     - R_WH
-    

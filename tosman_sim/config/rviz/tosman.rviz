@@ -178,14 +178,14 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.00999999978
       Style: Flat Squares
-      Topic: /arac/laser/scan
+      Topic: /tosman_0001/laser/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
     - Class: rviz/Marker
       Enabled: true
-      Marker Topic: /tosman_controller_frame/visualization_marker
+      Marker Topic: /tosman_0001_state_estimator/visualization_marker
       Name: Marker
       Namespaces:
         {}

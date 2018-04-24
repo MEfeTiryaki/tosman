@@ -21,8 +21,8 @@
 #include "kulman_joystick/JoystickAcc.hpp"
 #include "tosman_controller/TosmanOLController.hpp"
 #include "kulman_msgs/ActuatorCommands.h"
-#include "tosman_model/Model/TosmanModel.hpp"
-#include "tosman_state_estimator/TosmanEKF.hpp"
+#include "tosman_model/TosmanModel.hpp"
+#include "tosman_state_estimator/TosmanStateEstimatorHandler.hpp"
 
 // stl
 #include <memory>
@@ -31,10 +31,10 @@ namespace kuco {
 
 using KulmanModel_ = kuco::TosmanModel;
 using Controller_ = kuco::TosmanOLController;
-using Estimator_ = estimator::TosmanEKF;
+using EstimatorHandler_ = estimator::TosmanStateEstimatorHandler;
 using Joystick_ = joystick::JoystickAcc<KulmanModel_>;
 
-class TosmanControllerFrame : public KulmanControllerFrame<KulmanModel_,Controller_,Estimator_,Joystick_>
+class TosmanControllerFrame : public KulmanControllerFrame<KulmanModel_,Controller_,EstimatorHandler_,Joystick_>
 {
  public:
   // Constructor.

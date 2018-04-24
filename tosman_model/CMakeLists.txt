@@ -31,7 +31,7 @@ include_directories(
 )
 add_library(
   ${PROJECT_NAME}
-    src/Model/TosmanModel.cpp
+    src/TosmanModel.cpp
 )
 
 add_dependencies(${PROJECT_NAME}

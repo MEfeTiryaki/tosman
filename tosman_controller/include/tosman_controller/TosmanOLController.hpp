@@ -1,6 +1,6 @@
 #pragma once
 
-#include "tosman_model/Model/TosmanModel.hpp"
+#include "tosman_model/TosmanModel.hpp"
 #include "kulman_controller/LinearOpenLoopController.hpp"
 #include <vector>
 
@@ -11,7 +11,7 @@ class TosmanOLController : public LinearOpenLoopController<Model>
 {
  public:
   // Constructor.
-//  aracController(kuco::State& state);
+//  tosmanController(kuco::State& state);
   TosmanOLController(Model& model);
 
   // Destructor.

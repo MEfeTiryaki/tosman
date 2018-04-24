@@ -4,7 +4,7 @@
 
  */
 
-#include "tosman_model/Model/TosmanModel.hpp"
+#include "tosman_model/TosmanModel.hpp"
 
 namespace kuco {
 

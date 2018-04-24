@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include "arac_model/Model/KulmanModel.hpp"
-#include "arac_model/Module/Wheel.hpp"
+#include "kulman_model/Model/KulmanModel.hpp"
+#include "kulman_model/Module/Wheel.hpp"
 #include <vector>
 
 namespace kuco {

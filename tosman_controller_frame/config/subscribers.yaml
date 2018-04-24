@@ -7,7 +7,7 @@ subscribers:
     topic: /turtle1/cmd_vel
     queue_size: 10
   estimator:
-    topic: /state_estimator/kulman_state
+    topic: _state_estimator/kulman_state
     queue_size: 10
   imu:
     topic: /imu

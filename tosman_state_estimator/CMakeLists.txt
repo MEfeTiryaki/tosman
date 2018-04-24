@@ -6,10 +6,8 @@ add_definitions("-std=c++11")
 find_package(catkin REQUIRED
   COMPONENTS
   kulman_state_estimator
-  arac_state_estimator
   kulman_msgs
   tosman_model
-  arac_model
   roscpp
   param_io
   geometry_msgs
@@ -36,9 +34,8 @@ catkin_package(
     ${PROJECT_NAME}
   CATKIN_DEPENDS
     kulman_state_estimator
-    tosman_model
     kulman_msgs
- 	  arac_model
+ 	  tosman_model
     roscpp
     param_io
     geometry_msgs
@@ -51,8 +48,11 @@ catkin_package(
 
 add_library(
   ${PROJECT_NAME}
-  src/TosmanEKF.cpp
+# Estimators
   src/TosmanPerfectEstimator.cpp
+  src/TosmanEKF.cpp
+# Handlers
+  src/TosmanStateEstimatorHandler.cpp
 )
 
 add_dependencies(
@@ -70,6 +70,19 @@ add_dependencies(
   ${PROJECT_NAME}
   ${catkin_EXPORTED_TARGETS}
 )
+
+add_executable(tosman_state_estimator_node
+  src/tosman_state_estimator_node.cpp
+)
+add_dependencies(tosman_state_estimator_node
+  ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(tosman_state_estimator_node
+  tosman_state_estimator
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
+
 
 
 #############

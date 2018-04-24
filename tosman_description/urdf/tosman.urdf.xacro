@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 
-<!-- This file contains the description of the arac robot. -->
+<!-- This file contains the description of the tosman robot. -->
 
 <robot name="tosman" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Arguments -->
+  <xacro:arg name="robot_name"          default="tosman0000"/>
   <xacro:arg name="simulation"          default="true"/>
   <xacro:arg name="fixed"               default="false"/>
   <xacro:arg name="material_color_rgba" default="0.7 0.7 0.7 1.0"/>

@@ -1,12 +1,13 @@
-// tosman gazebo
+// osman gazebo
 #include "tosman_controller_frame/TosmanControllerFrame.hpp"
+#include <ros/console.h>
 
 namespace kuco {
 
 // Note : param_io is needed to use the getParam
 using namespace param_io;
 TosmanControllerFrame::TosmanControllerFrame():
-    KulmanControllerFrame<KulmanModel_,Controller_,Estimator_,Joystick_>()
+    KulmanControllerFrame<KulmanModel_,Controller_,EstimatorHandler_,Joystick_>()
 {
 
 }
@@ -18,7 +19,7 @@ TosmanControllerFrame::~TosmanControllerFrame()
 void TosmanControllerFrame::create()
 {
   this->model_ = new kuco::TosmanModel;
-  this->estimator_ = new estimator::TosmanEKF(*model_);
+  this->estimatorHandler_ = new estimator::TosmanStateEstimatorHandler(*model_);
   this->joystickHandler_ = new joystick::JoystickAcc<kuco::TosmanModel>(*model_);
   this->controller_ = new kuco::TosmanOLController(*model_);
 }
@@ -26,9 +27,11 @@ void TosmanControllerFrame::create()
 void TosmanControllerFrame::initilize(int argc, char **argv)
 {
   // nodeHandler olusturuldu.
-  this->nodeName_ = "/tosman_controller_frame";
+  this->nodeName_ = ros::this_node::getName();
   ros::init(argc, argv, nodeName_);
   this->nodeHandle_ = new ros::NodeHandle("~");
+
+  this->nodeName_ = ros::this_node::getName();
 
   // Parametreler okundu.
   readParameters();
@@ -46,7 +49,7 @@ void TosmanControllerFrame::initilize(int argc, char **argv)
 
   this->model_->initilize();
   this->joystickHandler_->initilize(nodeHandle_);
-  this->estimator_->initilize(nodeHandle_);
+  this->estimatorHandler_->initilize(nodeHandle_);
   this->controller_->initilize();
 
   print();
