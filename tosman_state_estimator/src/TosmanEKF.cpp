@@ -92,11 +92,13 @@ void TosmanEKF::advance(double dt)
   model_.getBody().getMeasuredState().setAngularVelocityInWorldFrame(
       angularVelocityWorldToBaseInWorldFrame_);
 
-      /*
-  std::cout << "X_real : \n" << positionWorldToBase_[0] << "," << positionWorldToBase_[1] << ","
-            << 2 * acos(orientationWorldToBase_[0]) << "," << velocityWorldToBaseInWorldFrame_[0]
-            << "," << angularVelocityWorldToBaseInWorldFrame_[2] << "," << std::endl;
-            */
+  /*
+  std::cout << "X_esti : \n" << Xm_.transpose() << std::endl;
+  std::cout << "X_real : \n" << positionWorldToBase_[0] << "  ,  " << positionWorldToBase_[1] << "  ,  "
+            << 2 * acos(orientationWorldToBase_[0]) << "  ,  " << velocityWorldToBaseInWorldFrame_[0]
+            << "  ,  " << velocityWorldToBaseInWorldFrame_[1]
+            << "  ,  " << angularVelocityWorldToBaseInWorldFrame_[2]  << std::endl;
+  //*/
   //std::cout << "____________________________________ " << std::endl;
 
   publishVisualization();
@@ -146,6 +148,8 @@ void TosmanEKF::initilizeSubscribers()
 }
 void TosmanEKF::initilizePublishers()
 {
+  KulmanStateEstimatorBase::initilizePublishers();
+
   vis_pub_ = nodeHandle_->advertise<visualization_msgs::Marker>("visualization_marker", 0);
 }
 
